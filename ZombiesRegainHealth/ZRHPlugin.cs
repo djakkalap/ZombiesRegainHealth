@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Smod2;
-using Smod2.API;
+﻿using Smod2;
 using Smod2.Attributes;
 using Smod2.Config;
 using Smod2.EventHandlers;
-using Smod2.Events;
-using Smod2.Lang;
-using Smod2.Piping;
-
+using ZombiesRegainHealth.Commands;
 using ZombiesRegainHealth.Events;
 
 namespace ZombiesRegainHealth {
@@ -39,6 +29,11 @@ namespace ZombiesRegainHealth {
 
         // Register parts of the plugin.
         public override void Register() {
+            AddConfig(new ConfigSetting("zrh_health_regen", 15, true, "This integer determines how much HP the zombies should regenerate."));
+            AddConfig(new ConfigSetting("zrh_disable", false, true, "Determines whether to disable the plugin."));
+
+            AddCommand("zrhdisable", new ZRHDisableCommand(this));
+
             AddEventHandler(typeof(IEventHandlerPlayerDie), new ZombieKillEvent(this));
         }
     }
