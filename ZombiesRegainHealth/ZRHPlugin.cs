@@ -29,10 +29,6 @@ namespace ZombiesRegainHealth {
         )]
 
     public class ZRHPlugin : Plugin {
-
-        [ConfigOption]
-        internal int HealthRegen = 10;
-
         public override void OnDisable() {
             Info(Details.name + " has been disabled.");
         }
@@ -43,7 +39,11 @@ namespace ZombiesRegainHealth {
 
         // Register parts of the plugin.
         public override void Register() {
+            AddConfig(new ConfigSetting("zrh_health_regen", 10, true, "Determines how much HP the zombie regenerates."));
+
             AddEventHandler(typeof(IEventHandlerPlayerDie), new ZombieKillEvent(this));
+            // Debug
+            AddEventHandler(typeof(IEventHandlerDoorAccess), new DebugEvent(this));
         }
     }
 }

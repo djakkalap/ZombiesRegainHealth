@@ -24,8 +24,8 @@ namespace ZombiesRegainHealth.Events {
             if (ev.Killer.TeamRole.Role == Role.SCP_049_2)
             {
                 Player killer = ev.Killer;
-
-                killer.AddHealth(plugin.GetConfigInt("zrh_healthregen"));
+                
+                killer.AddHealth(plugin.GetConfigInt("zrh_health_regen"));
             }
         }
     }

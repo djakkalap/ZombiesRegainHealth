@@ -10,6 +10,7 @@ using Smod2.Attributes;
 using Smod2.Config;
 using Smod2.EventHandlers;
 using Smod2.Events;
+using Smod2.EventSystem.Events;
 using Smod2.Lang;
 using Smod2.Piping;
 
@@ -23,9 +24,23 @@ namespace ZombiesRegainHealth.Events {
             if (ev.Player.TeamRole.Role == Role.SCP_049_2)
             {
                 Player killer = ev.Player;
+                int roleMaxHealth = killer.TeamRole.MaxHP;
+                int killerHealth = killer.GetHealth();
+                int healthRegen = plugin.GetConfigInt("zrh_health_regen");
 
-                killer.AddHealth(plugin.GetConfigInt("zrh_healthregen"));
+                if (killerHealth != killer.TeamRole.MaxHP)
+                {
+                    if (killerHealth + healthRegen > roleMaxHealth)
+                    {
+                        killer.SetHealth(roleMaxHealth);
+                    } else
+                    {
+                        killer.AddHealth(healthRegen);
+                    }
+                }
             }
+
+            plugin.Debug("New health: " + ev.Player.GetHealth());
         }
     }
 }
