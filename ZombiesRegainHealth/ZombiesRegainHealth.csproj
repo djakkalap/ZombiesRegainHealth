@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\DebugEvent.cs" />
     <Compile Include="Events\ZombieKillEvent.cs" />
     <Compile Include="ZRHPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,16 +14,15 @@ using Smod2.Lang;
 using Smod2.Piping;
 
 namespace ZombiesRegainHealth.Events {
-    class ZombieKillEvent : IEventHandlerPlayerDie {
+    class DebugEvent : IEventHandlerDoorAccess {
         private readonly ZRHPlugin plugin;
+        public DebugEvent(ZRHPlugin plugin) => this.plugin = plugin;
 
-        public ZombieKillEvent(ZRHPlugin plugin) => this.plugin = plugin;
-
-        public void OnPlayerDie(PlayerDeathEvent ev) {
-
-            if (ev.Killer.TeamRole.Role == Role.SCP_049_2)
+        // Just for testing, because I don't have anyone to test it with :(
+        public void OnDoorAccess(PlayerDoorAccessEvent ev) {
+            if (ev.Player.TeamRole.Role == Role.SCP_049_2)
             {
-                Player killer = ev.Killer;
+                Player killer = ev.Player;
 
                 killer.AddHealth(plugin.GetConfigInt("zrh_healthregen"));
             }

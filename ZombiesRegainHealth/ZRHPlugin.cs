@@ -29,6 +29,10 @@ namespace ZombiesRegainHealth {
         )]
 
     public class ZRHPlugin : Plugin {
+
+        [ConfigOption]
+        internal int HealthRegen = 10;
+
         public override void OnDisable() {
             Info(Details.name + " has been disabled.");
         }
